@@ -87,6 +87,7 @@ def get_update():
     usernm = request.args.get("usernm")
     courseid = request.args.get("courseid")
     ret = api.get_update(usernm, courseid)
+    print(ret)
     return resp_ok(ret)
 
 
