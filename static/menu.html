@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Samueli924/chaoxing自动化</title>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+
+
+
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        font-family:"Microsoft YaHei",微软雅黑,"Microsoft JhengHei",华文细黑,STHeiti,MingLiu;
+        font-size: 16px;
+        font-style: normal;
+        text-decoration: none;
+        color: black;
+    }
+    .clearfix:after {
+        content:"";
+        display:block;
+        visibility:hidden;
+        clear:both;
+    }
+
+    body {
+        width: 100%;
+        min-height: 100vh;
+        background: linear-gradient(
+                135deg,
+                hsl(170deg, 80%, 70%),
+                hsl(190deg, 80%, 70%),
+                hsl(250deg, 80%, 70%),
+                hsl(320deg, 80%, 70%)
+        );
+        background-repeat: no-repeat;
+        background-size: 300% 300%;
+        animation: gradient-move 10s ease alternate infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            background-position: 0% 0%;
+        }
+        100% {
+            background-position: 100% 100%;
+        }
+    }
+
+    .background {
+        text-align: center;
+        place-items: center;
+        background-size: cover;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .main-title {
+        color: #fff;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        font-size: 40px;
+        font-weight: bold;
+        text-shadow: 3px 3px 3px black;
+    }
+
+    .glass {
+        border: 1px solid transparent;
+        display: block;
+        width: 80vw;
+        min-height: 80vh;
+        /* margin-left: 10vw; */
+        margin: 0 auto;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        background-color: rgba(255, 255, 255, 0.25);
+        box-shadow: 0 8px 32px 0 rgba(27, 0, 37, 0.89);
+        border-radius: 10px;
+    }
+    .scroll {
+        font-size: 20px;
+        font-weight: bold;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        padding: 10px 0px 10px 0px;
+        /* background-color: #fff; */
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        background-color: rgba(255, 255, 255, 0.75);
+    }
+
+
+     .box {
+         margin-top: 10px;
+         margin-bottom: 10px;
+     }
+
+     .lab {
+         margin-right: 10px;
+     }
+ 
+</style>
+
+
+<body>
+<div class="background">
+    <div class="main-title">Samueli924/chaoxing</div>
+    <div class="glass">
+        <div class="scroll">
+            工作台
+        </div>
+        <div class="box">
+                <span class="lab">用户名:</span>
+                <span class="lab" id="usernm"></span>
+                <span class="lab">课程id:</span>
+                <span class="lab" id="courseid"></span>
+                <span class="lab">倍速:</span>
+                <input class="lab" id="speedsetting" placeholder="1"></span>
+                <button class="lab" id="startLearn">开始学习(请勿重复点击)</button>
+                <button class="lab" id="stopLearn">停止学习(完成当前任务后)</button>
+        </div>
+
+        <div class="scroll">
+            进度
+        </div>
+        <div class="box">
+            <span class="lab">当前任务id:</span>
+            <span class="lab" id="jobid"></span>
+            <span class="lab">当前倍速:</span>
+            <input class="lab" id="speed" placeholder="1"></span>
+        </div>
+        <div class="box">
+            <span class="lab">总任务:</span>
+            <span class="lab" id="jobdone"></span>
+            <span class="lab">/</span>
+            <span class="lab" id="jobtotal"></span>
+        </div>
+        <div class="box">
+            <span class="lab">当前任务:</span>
+            <span class="lab" id="donecurrent"></span>
+            <span class="lab">/</span>
+            <span class="lab" id="totalcurrent"></span>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+
+    function GetQueryString(name)
+    {
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if(r!=null)return  unescape(r[2]); return null;
+    }
+    
+    
+</script>
+<script>
+    $(document).ready(function() {
+        console.log(GetQueryString("usernm"))
+        console.log(GetQueryString("courseid"))
+        $("#usernm")[0].innerText = GetQueryString("usernm")
+        $("#courseid")[0].innerText = GetQueryString("courseid")
+        setInterval(update,1000)
+    })
+
+
+    function update() {
+        var usernm = $("#usernm")[0].innerText
+        var courseid = $("#courseid")[0].innerText
+        $.ajax({
+                type: "GET",
+                url: "/api/get_update",
+                dataType: "JSON",
+                data: {
+                    "usernm": usernm,
+                    "courseid": courseid,
+                },
+                success: function (response) {
+                    var data = response.data
+                    console.log(data)
+                    $("#jobid")[0].innerText = data.jobId
+                    $("#speed")[0].value = data.currentSpeed
+                    $("#jobdone")[0].innerText = data.jobsDone
+                    $("#jobtotal")[0].innerText = data.totalJobs
+                    $("#donecurrent")[0].innerText = data.playingTime
+                    $("#totalcurrent")[0].innerText = data.totalTime
+                },
+            });
+    }
+
+    $(document).on('click','button#startLearn',function(e){
+        var usernm = $("#usernm")[0].innerText
+        var courseid = $("#courseid")[0].innerText
+        var speed = $("#speedsetting")[0].value
+        console.log(speed)
+        $.ajax({
+                type: "GET",
+                url: "/api/start_learn",
+                dataType: "JSON",
+                data: {
+                    "usernm": usernm,
+                    "courseid": courseid,
+                    "speed": speed
+                },
+                success: function (response) {
+                    if (response.code==200&&response.data.data.code==1) {
+                            console.log("请求成功" + response.data)
+                        }
+                    }
+                })
+    })
+
+    $(document).on('click','button#stopLearn',function(e){
+        var usernm = $("#usernm")[0].innerText
+        var courseid = $("#courseid")[0].innerText
+        $.ajax({
+                type: "GET",
+                url: "/api/stop_learn",
+                dataType: "JSON",
+                data: {
+                    "usernm": usernm,
+                    "courseid": courseid
+                },
+                success: function (response) {
+                    if (response.code==200&&response.data.data.code==1) {
+                            console.log("请求成功" + response.data)
+                        }
+                    }
+                })
+    })
+</script>
+
+</html>

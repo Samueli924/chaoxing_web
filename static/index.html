@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Samueli924/chaoxing自动化</title>
+    <link rel="stylesheet" type="text/css" href="progressjs.css">
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="circle-progress/dist/circle-progress.js"></script>
+
+
+
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        font-family:"Microsoft YaHei",微软雅黑,"Microsoft JhengHei",华文细黑,STHeiti,MingLiu;
+        font-size: 16px;
+        font-style: normal;
+        text-decoration: none;
+        color: black;
+    }
+    .clearfix:after {
+        content:"";
+        display:block;
+        visibility:hidden;
+        clear:both;
+    }
+
+    body {
+        width: 100%;
+        min-height: 100vh;
+        background: linear-gradient(
+                135deg,
+                hsl(170deg, 80%, 70%),
+                hsl(190deg, 80%, 70%),
+                hsl(250deg, 80%, 70%),
+                hsl(320deg, 80%, 70%)
+        );
+        background-repeat: no-repeat;
+        background-size: 300% 300%;
+        animation: gradient-move 10s ease alternate infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            background-position: 0% 0%;
+        }
+        100% {
+            background-position: 100% 100%;
+        }
+    }
+
+    .background {
+        text-align: center;
+        place-items: center;
+        background-size: cover;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .main-title {
+        color: #fff;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        font-size: 40px;
+        font-weight: bold;
+        text-shadow: 3px 3px 3px black;
+    }
+
+    .glass {
+        border: 1px solid transparent;
+        display: block;
+        width: 80vw;
+        min-height: 80vh;
+        /* margin-left: 10vw; */
+        margin: 0 auto;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        background-color: rgba(255, 255, 255, 0.25);
+        box-shadow: 0 8px 32px 0 rgba(27, 0, 37, 0.89);
+        border-radius: 10px;
+    }
+    .box {
+        margin: 0 auto;
+    }
+    .scroll {
+        font-size: 20px;
+        font-weight: bold;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        padding: 10px 0px 10px 0px;
+        /* background-color: #fff; */
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        background-color: rgba(255, 255, 255, 0.75);
+    }
+
+    .readme {
+        margin: 0 auto;
+        text-align: center;
+        align-items: center;
+        font-size: 16px;
+        width: 80%;
+        /* margin-bottom: 10px; */
+        /* border-bottom: 2px solid black; */
+
+    }
+
+    .split {
+        margin: 0 auto;
+        width: 80%;
+        height: 15px;
+        border-bottom: 2px solid rgba(0, 0, 0, 0.5);
+    }
+
+     .box {
+         margin-top: 10px;
+         margin-bottom: 10px;
+     }
+
+
+     .badge {
+        margin-left: 5px;
+        margin-right: 5px;
+        text-decoration: none;
+        font-style: normal;
+     }
+
+    .normal-link {
+        text-decoration: none;
+        font-style: normal;
+        color: blue;
+        font-weight: bold;
+    }
+
+    .table-box {
+        margin: 0 auto;
+    }
+
+    .mission {
+        /* margin-top: 10px;
+        margin-bottom: 10px; */
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+
+
+    .log-box {
+        overflow-y: scroll;
+        text-align: left;
+        padding-left: 5px;
+        background-color: rgba(255, 255, 255, 0.3);
+        border: 1px solid black;
+        font-size: 12px;
+        height: 100px;
+    }
+    /*-------滚动条整体样式----*/
+
+    .log-box::-webkit-scrollbar {
+        width:8px;
+        height:8px;
+    }
+
+    .log-box::-webkit-scrollbar-thumb {
+        border-radius:100px;
+        -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+        background: rgba(255, 255, 255, 0.25);
+
+    }
+
+    .log-box::-webkit-scrollbar-track {
+        -webkit-box-shadow:inset 0 0 5px rgba(0,0,0,0.2);
+        border-radius:0;
+        background:rgba(0,0,0,0.1);
+    }
+
+    .hidden {
+        visibility: hidden;
+    }
+
+    .color-table thead, .color-table tr {
+        border-top-width: 1px;
+        border-top-style: solid;
+        border-top-color: rgb(230, 189, 189);
+    }
+
+    .color-table {
+        margin: 0 auto;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        border-bottom-color: rgb(230, 189, 189);
+    }
+
+    .color-table td, .color-table th {
+        font-weight: bold;
+        padding: 5px 10px;
+        font-size: 12px;
+        font-family: Verdana;
+        color: rgb(177, 106, 104);
+    }
+
+    .color-table tr:nth-child(even) {
+    background: rgb(238, 211, 210)
+    }
+
+    .color-table tr:nth-child(odd) {
+    background: #FFF
+    }
+
+    td button {
+        font-size: 12px;
+        background-color: rgba(177, 106, 104, 0.3);
+    }
+
+    .circle-progress {
+        width: 40%;
+        height: auto;
+    }
+
+    .circle-progress-value {
+        stroke-width: 50px;
+        stroke: hsl(100, 90%, 70%);
+    }
+    .circle-progress-circle {
+        stroke-width: 40px;
+        stroke: hsl(100, 15%, 60%);
+        fill: hsl(100, 15%, 60%);
+    }
+    .circle-progress-text {
+        fill: white;
+        font-weight: bold;
+    }
+
+    .small {
+        vertical-align: top;
+        display: inline-block;
+        /* background-color: black; */
+        width: 48%;
+        min-height: 200px;
+        margin-bottom: 15px;
+    }
+
+</style>
+
+
+<body>
+<div class="background">
+    <div class="main-title">Samueli924/chaoxing</div>
+    <div class="glass">
+        <div class="scroll">
+            注意事项
+        </div>
+        <div class="box">
+            <a href="https://github.com/Samueli924/chaoxing" target="_blank" class="badge">
+                <img src="https://img.shields.io/github/stars/Samueli924/chaoxing" alt="Github Stars">
+            </a>
+            <a href="https://github.com/Samueli924/chaoxing" target="_blank" class="badge">
+                <img src="https://img.shields.io/github/forks/Samueli924/chaoxing" alt="Github Forks">
+            </a>
+            <a href="https://github.com/Samueli924/chaoxing" target="_blank" class="badge">
+                <img src="https://img.shields.io/github/languages/code-size/Samueli924/chaoxing" alt="Code-size">
+            </a>
+            <a href="https://github.com/Samueli924/chaoxing" target="_blank" class="badge">
+                <img src="https://img.shields.io/github/v/release/Samueli924/chaoxing?display_name=tag&sort=semver" alt="version">
+            </a>
+            <a href="https://t.me/Samueli924" target="_blank" class="badge">
+                <img src="https://img.shields.io/badge/-Telegram-blue?logo=telegram" alt="Telegram">
+            </a>
+        </div>
+        <div class="readme">
+            欢迎使用Samueli924/chaoxing项目，项目源码地址<a href="https://github.com/Samueli924/chaoxing" class="normal-link">进入</a><br />
+            使用本代码表示已接受要求：<br />
+            本代码遵循 <a href="https://github.com/Samueli924/chaoxing/blob/main/LICENSE" class="normal-link">GPL-3.0 License协议</a>
+            。允许<b>开源/免费使用</b>，不允许使用本代码<b>盈利</b>
+        </div>
+        <div class="split"></div>
+
+        <div class="scroll">
+            用户列表
+        </div>
+        <div class="table-box">
+            <table id="user_table" class="color-table">
+                <tr>
+                    <td>账号</td>
+                    <td>姓名</td>
+                    <td>学校</td>
+                    <td>Cookies</td>
+                    <td>上次检查时间</td>
+                    <td colspan="3">命令</td>
+
+                </tr>
+                <tr>
+                    <td colspan="8" onclick="add_user_button()" style="cursor: pointer;">点击新建用户</td>
+                </tr>
+            </table>
+            <div class="box hidden" id="add_form">
+                <label for="usernm">账号</label>
+                <input type="text" name="usernm" id="usernm">
+                <label for="passwd">密码</label>
+                <input type="password" name="passwd" id="passwd">
+                <button onclick="login()" id="login_button">登录</button>
+            </div>
+
+        </div>
+        <div class="scroll">
+            课程列表
+        </div>
+        <div class="table-box">
+            <div id="course_user_id" style="visibility: hidden;">13554337909</div>
+            <table id="course_table" class="color-table">
+                <tr>
+                    <td>课程ID</td>
+                    <td>课程名</td>
+                    <td>是否结课</td>
+                    <td>是否有记录</td>
+                    <td colspan="2">命令</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- <div class="scroll">学习任务</div>
+        <div class="mission">
+            <div class="small">
+                <div class="progress">
+                </div>
+            </div>
+            <div class="small">
+                <div>当前任务: </div>
+                <div>
+                    <span>10:00/20:00</span>
+                    <span>停止</span>
+                </div>
+                <div class="log-box"></div>
+            </div>
+        </div> -->
+
+
+
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    function add_user_button() {
+        document.getElementById("add_form").classList.remove("hidden");
+    }
+
+    function login() {
+        var usernm = document.getElementById("usernm").value
+        var passwd = document.getElementById("passwd").value
+        console.log(usernm)
+        console.log(passwd)
+        if (usernm&&passwd){
+            $.ajax({
+                type: "GET",
+                url: "/api/get_info",
+                dataType: "JSON",
+                data: {
+                    "usernm": usernm,
+                    "passwd": passwd,
+                },
+                success: function (response) {
+                    if (response.data.code==1) {
+                        var data = response.data.data
+                        $("#"+usernm).remove()
+                        var tr = "<tr id='"+ data.usernm +"'><td>"+ data.usernm +"</td><td>"+ data.name +"</td><td>"+ data.school +"</td><td>有效</td><td>"+ data.tsp +"</td><td><button class='refresh_course'>刷新课程</button></td><td><button class='refresh_user'>刷新Cookies</button></td><td><button class='delete_user'>删除用户</button></td></tr>"
+                        $("#user_table tr:first").after(tr)
+                        $("#usernm").val("")
+                        $("#passwd").val("")
+                        $("#tips").remove()
+                        $("#add_form").addClass("hidden")
+                    }
+                    else if (response.data.code==-1) {
+                        $("#tips").remove()
+                        var span = "<span id='tips'>账号或密码错误</span>"
+                        $("#login_button").after(span)
+                    }
+                },
+            });
+        }
+        else {
+            $("#tips").remove()
+            var span = "<span id='tips'>不能为空</span>"
+            $("#login_button").after(span)
+        }
+    }
+
+    function load_user() {
+        $.ajax({
+                type: "GET",
+                url: "/api/get_all_user",
+                dataType: "JSON",
+                success: function (response) {
+                    if (response.code==200) {
+                        $("#user_table").children().not(':first-child').remove()
+                        console.log("请求成功" + response.data)
+                        for (user in response.data) {
+                            data = response.data[user]
+                            var tr = "<tr id='"+ data.usernm +"'><td>"+ data.usernm +"</td><td>"+ data.name +"</td><td>"+ data.school +"</td><td>"+ data.valid +"</td><td>"+ data.tsp +"</td><td><button class='refresh_course'>刷新课程</button></td><td><button class='refresh_user'>刷新Cookies</button></td><td><button class='delete_user'>删除用户</button></td></tr>"
+                            $("#user_table tr:first").after(tr)
+                        }
+                    }
+                }
+        })
+    }
+
+</script>
+<script>
+    $(document).ready(function() {
+        load_user();
+    })
+
+    $(document).on('click','button.refresh_user',function(e){
+        var usernm = e.target.parentNode.parentNode.firstChild.textContent
+        $.ajax({
+                type: "GET",
+                url: "/api/refresh_user",
+                dataType: "JSON",
+                data: {
+                    "usernm": usernm,
+                },
+                success: function (response) {
+                    if (response.code==200&&response.data.code==1) {
+                        var data = response.data.data.data
+                        // console.log(data)
+                        $("#"+usernm).remove()
+                        var tr = "<tr id='"+ data.usernm +"'><td>"+ data.usernm +"</td><td>"+ data.name +"</td><td>"+ data.school +"</td><td>有效</td><td>"+ data.tsp +"</td><td><button class='refresh_course'>刷新课程</button></td><td><button class='refresh_user'>刷新Cookies</button></td><td><button class='delete_user'>删除用户</button></td></tr>"
+                        $("#user_table tr:first").after(tr)
+                        }
+                    }
+        })
+    })
+
+    $(document).on('click','button.refresh_course',function(e){
+        var usernm = e.target.parentNode.parentNode.firstChild.textContent
+        $("#course_table tr:not(:first)").remove()
+        $.ajax({
+                type: "GET",
+                url: "/api/refresh_course",
+                dataType: "JSON",
+                data: {
+                    "usernm": usernm,
+                },
+                success: function (response) {
+                    if (response.code==200&&response.data.code==1) {
+                        console.log("请求成功" + response.data)
+                        var courses = response.data.data.data
+                        console.log(courses)
+                        for (course in courses) {
+                            data = courses[course]
+                            var tr = "<tr id='"+ data.id +"'><td>"+ data.id +"</td><td>"+ data.name +"</td><td>"+ data.state +"</td><td>"+ data.exists + "</td><td><button class='add_course'>添加任务</button></td><td><button class='delete_course'>删除缓存</button></td></tr>"
+                            $("#course_table tr:first").after(tr)
+                        $("#course_user_id").value = usernm
+                        }
+                    }
+                }
+        })
+    })
+
+    $(document).on('click','button.delete_user',function(e){
+        var usernm = e.target.parentNode.parentNode.firstChild.textContent
+        $.ajax({
+                type: "GET",
+                url: "/api/delete_user",
+                dataType: "JSON",
+                data: {
+                    "usernm": usernm,
+                },
+                success: function (response) {
+                    if (response.code==200&&response.data.code==1) {
+                        console.log("请求成功" + response.data)
+                            $("#"+usernm).remove()
+                        }
+                    }
+                })
+    })
+
+    $(document).on('click','button.delete_course',function(e){
+        var td = $(this).parent().siblings()
+        var courseid = td[0].innerText
+
+        var usernm = $("#course_user_id")[0].textContent
+        // console.log(usernm)
+        // console.log(courseid)
+        // console.log(exists)
+        $.ajax({
+                type: "GET",
+                url: "/api/delete_course",
+                dataType: "JSON",
+                data: {
+                    "usernm": usernm,
+                    "courseid": courseid
+                },
+                success: function (response) {
+                    // console.log(response)
+                    if (response.code==200&&response.data.code==1) {
+                            console.log("请求成功" + response.data)
+                            td[3].innerText = "不存在"
+                        }
+                    }
+                })
+    })
+
+    $(document).on('click','button.add_course',function(e){
+        var courseid = $(this).parent().siblings()[0].innerText
+        var usernm = $("#course_user_id")[0].innerHTML
+        window.open("menu.html?usernm="+usernm+"&courseid="+courseid);
+        // console.log(courseid)
+        // console.log(usernm)
+        // $.ajax({
+        //         type: "GET",
+        //         url: "/api/add_course",
+        //         dataType: "JSON",
+        //         data: {
+        //             "usernm": usernm,
+        //             "courseid": courseid
+        //         },
+        //         success: function (response) {
+        //             if (response.code==200&&response.data.data.code==1) {
+        //                     console.log("请求成功" + response.data)
+        //                 }
+        //             }
+        //         })
+    })
+</script>
+
+
+</html>
