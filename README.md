@@ -1,10 +1,10 @@
-# :computer: 超星学习通自动化完成任务点(WEB版本)
+# :computer: 超星学习通自动化完成任务点(WEB版本)Beta
 
 :star: 觉得有帮助的朋友可以给个**Star**
 
 ## :point_up: 更新通知
 
-20211217更新内容：从原repo[Samueli924/chaoxing](https://github.com/Samueli924/chaoxing)中剥离出来，作为独立的WEB版本发布
+20211217更新内容：从原repo[Samueli924/chaoxing](https://github.com/Samueli924/chaoxing)中剥离出来，作为独立的WEB版本发布，由于处于开发初期，所以BUG数量会多于原repo，若想使用稳定版本，请访问原repo[Samueli924/chaoxing](https://github.com/Samueli924/chaoxing)
 
 ## :question: 反馈方式  
 
