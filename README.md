@@ -29,8 +29,6 @@
 
 5. 浏览器访问http://127.0.0.1:7777
 
-6. [使用文档](https://blog.samuelchen.cn/archives/chaoxingwebtutorial)
-
 ### :two: 使用DOCKER部署
 
 待正式版使用测试过一段时间，BUG较少之后再添加DOCKER部署方式
