@@ -309,7 +309,7 @@
             课程列表
         </div>
         <div class="table-box">
-            <div id="course_user_id" style="visibility: hidden;">13554337909</div>
+            <div id="course_user_id" style="visibility: hidden;"></div>
             <table id="course_table" class="color-table">
                 <tr>
                     <td>课程ID</td>
@@ -452,7 +452,9 @@
                             data = courses[course]
                             var tr = "<tr id='"+ data.id +"'><td>"+ data.id +"</td><td>"+ data.name +"</td><td>"+ data.state +"</td><td>"+ data.exists + "</td><td><button class='add_course'>添加任务</button></td><td><button class='delete_course'>删除缓存</button></td></tr>"
                             $("#course_table tr:first").after(tr)
-                        $("#course_user_id").value = usernm
+                        $("#course_user_id")[0].value = usernm
+                        $("#course_user_id")[0].innerText = usernm
+                            
                         }
                     }
                 }
