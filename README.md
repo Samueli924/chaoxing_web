@@ -17,21 +17,7 @@
 
 ## :books: 使用方法
 
-### :one: 使用Python环境运行源文件
-
-1. git clone https://github.com/Samueli924/chaoxing_web.git
-
-2. cd chaoxing_web
-
-3. pip install -r requirements.txt
-
-4. python web_listener.py
-
-5. 浏览器访问http://127.0.0.1:7777
-
-### :two: 使用DOCKER部署
-
-待正式版使用测试过一段时间，BUG较少之后再添加DOCKER部署方式
+[使用文档](https://blog.samuelchen.cn/archives/samueli924chaoxingweb-readme)
 
 ## :warning: 免责声明
 - 本代码遵循 [GPL-3.0 License](https://github.com/Samueli924/chaoxing/blob/main/LICENSE)协议，允许**开源/免费使用和引用/修改/衍生代码的开源/免费使用**，不允许**修改和衍生的代码作为闭源的商业软件发布和销售**，禁止**使用本代码盈利**，以此代码为基础的程序**必须**同样遵守[GPL-3.0 License](https://github.com/Samueli924/chaoxing/blob/main/LICENSE)协议  
