@@ -4,12 +4,11 @@
 
 ## :point_up: 更新通知
 
-20211217更新内容：从原repo[Samueli924/chaoxing](https://github.com/Samueli924/chaoxing)中剥离出来，作为独立的WEB版本发布，由于处于开发初期，所以BUG数量会多于原repo，若想使用稳定版本，请访问原repo[Samueli924/chaoxing](https://github.com/Samueli924/chaoxing)
+20220302 当前程序的接口能用于>80%的课程，存在部分新设课程使用超星的最新接口，使用本程序会出现一些报错内容。但鉴于本人已毕业，无测试相关课程的条件，且近期较为繁忙，故无继续更新接口的计划。假如还有需要的朋友可以尝试Fork [Core项目](https://github.com/Samueli924/chaoxing)，抓取最新的接口提交pr，为本项目提供帮助。谢谢
 
 ## :question: 反馈方式  
 
-想要交流脚本运行或运行有问题需要提问的朋友可以选择加入Telegram群聊，我会在群聊中尽量尽快回复你的消息  
-[点此加入群聊](https://t.me/samueli924)  
+暂时停止提供反馈方式
 
 ## :smile: 相关项目
 
